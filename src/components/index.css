@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 80% 20%
+}
+
+.editor {
+    background-color: antiquewhite;
+}
+
+.rightMenu {
+    background-color: beige;
+}
+
+.dragItem {
+    background-color: chartreuse;
+}
+
+.dustbin {
+    background-color: red;
+    cursor: pointer
+}
