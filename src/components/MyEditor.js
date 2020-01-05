@@ -12,6 +12,7 @@ import DragSource from "./DragSource/index";
 import Box from './Box'
 import CustomDragLayer from "./CustomerDragLayer";
 import update from "immutability-helper";
+import CustomParagraph from "./Blocks/paragraph";
 
 const HOTKEYS = {
     'mod+b': 'bold',
@@ -55,9 +56,9 @@ const MyEditor = () => {
                 );
             default:
                 return (
-                    <Box id={props.element.id} left={props.element.location.left} top={props.element.location.top} hideSourceOnDrag={false}>
+                    <CustomParagraph id={props.element.id} left={props.element.location.left} top={props.element.location.top} hideSourceOnDrag={false}>
                         <DefaultElement {...props} />
-                    </Box>
+                    </CustomParagraph>
                 );
         }
     }, []);
@@ -276,7 +277,7 @@ const initialValue = [
             { text: '<textarea>', code: true },
             { text: '!' },
         ],
-        location: { top: 90, left: 20 }
+        location: { top: 50, left: 20 }
     },
     {
         id: 2,
@@ -292,25 +293,25 @@ const initialValue = [
                     ', or add a semantically rendered block quote in the middle of the page, like this:',
             },
         ],
-        location: { top: 170, left: 20 }
+        location: { top: 130, left: 20 }
     },
     {
         id: 3,
         type: 'block-quote',
         children: [{ text: 'A wise quote.' }],
-        location: { top: 270, left: 20 }
+        location: { top: 230, left: 20 }
     },
     {
         id: 4,
         type: 'paragraph',
         children: [{ text: 'Try it out for yourself!' }],
-        location: { top: 350, left: 20 }
+        location: { top: 310, left: 20 }
     },
     {
         id: 5,
         type: 'signature',
         children: [{ text: "Signature" }],
-        location: { top: 430, left: 20 }
+        location: { top: 390, left: 20 }
     }
 ];
 

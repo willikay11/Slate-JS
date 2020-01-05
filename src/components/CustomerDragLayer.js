@@ -2,6 +2,7 @@ import React from 'react'
 import { useDragLayer } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import BoxDragPreview from './BoxDragPreview'
+import TextBoxPreview from '../components/Blocks/paragraph/preview';
 // import snapToGrid from './snapToGrid'
 const layerStyles = {
     position: 'fixed',
@@ -50,7 +51,7 @@ const CustomDragLayer = props => {
     function renderItem() {
         switch (itemType) {
             case ItemTypes.BOX:
-                return <BoxDragPreview title="Title" />;
+                return <TextBoxPreview />;
             default:
                 return null
         }
