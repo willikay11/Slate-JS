@@ -4,7 +4,8 @@ import { Editable, withReact, useSlate, Slate } from 'slate-react'
 import { Editor, Transforms, createEditor } from 'slate'
 import { withHistory } from 'slate-history';
 import { useDrop } from 'react-dnd'
-import { Row, Col, Affix } from 'antd';
+import { Row, Col, Affix, Drawer } from 'antd';
+import uuid from 'react-uuid'
 
 import ItemTypes from './ItemTypes'
 import { Button, SlateIcon, Toolbar } from './toolbar'
@@ -13,6 +14,7 @@ import Box from './Box'
 import CustomDragLayer from "./CustomerDragLayer";
 import update from "immutability-helper";
 import CustomParagraph from "./Blocks/paragraph";
+import {set} from "immutable";
 
 const HOTKEYS = {
     'mod+b': 'bold',
@@ -46,6 +48,7 @@ const DefaultElement = props => {
 
 const MyEditor = () => {
     const [value, setValue] = useState(initialValue);
+    const [visible, setVisible] = useState(false);
     const renderElement = useCallback(props => {
         switch (props.element.type) {
             case 'signature':
@@ -76,10 +79,10 @@ const MyEditor = () => {
             let newBlock = null;
 
             if(item.left === undefined) {
-                left = 80;
+                left = 20;
                 top = delta.y;
                 newBlock = {
-                    id: 6,
+                    id: uuid(),
                     type: itemType,
                     children: [{ text: "This is a new paragraph" }],
                     location: { top, left }
@@ -103,6 +106,14 @@ const MyEditor = () => {
             setValue(value => [ ...value, newBlock]);
         }
 
+    };
+
+    const onOpen = () => {
+        setVisible(true)
+    };
+
+    const onClose = () => {
+        setVisible(false);
     };
 
     return (
@@ -147,8 +158,18 @@ const MyEditor = () => {
                 </Slate>
             </Col>
             <Col span={4} style={{ flexDirection: "column", flex: 1, display: 'flex'}}>
-                <DragSource/>
+                <DragSource onOpen={() => onOpen()}/>
             </Col>
+            <Drawer
+                title="JSON OUTPUT"
+                placement="right"
+                closable={false}
+                onClose={onClose}
+                visible={visible}
+                width={500}
+            >
+                <div><pre>{ JSON.stringify(value, null, 2) }</pre></div>
+            </Drawer>
         </Row>
     )
 };
@@ -266,7 +287,7 @@ const MarkButton = ({ format, icon }) => {
 
 const initialValue = [
     {
-        id: 1,
+        id: uuid(),
         type: 'paragraph',
         children: [
             { text: 'This is editable ' },
@@ -280,7 +301,7 @@ const initialValue = [
         location: { top: 50, left: 20 }
     },
     {
-        id: 2,
+        id: uuid(),
         type: 'paragraph',
         children: [
             {
@@ -296,19 +317,19 @@ const initialValue = [
         location: { top: 130, left: 20 }
     },
     {
-        id: 3,
+        id: uuid(),
         type: 'block-quote',
         children: [{ text: 'A wise quote.' }],
         location: { top: 230, left: 20 }
     },
     {
-        id: 4,
+        id: uuid(),
         type: 'paragraph',
         children: [{ text: 'Try it out for yourself!' }],
         location: { top: 310, left: 20 }
     },
     {
-        id: 5,
+        id: uuid(),
         type: 'signature',
         children: [{ text: "Signature" }],
         location: { top: 390, left: 20 }

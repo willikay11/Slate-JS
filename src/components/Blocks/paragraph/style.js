@@ -8,7 +8,7 @@ export const TextBox = styled.div`
 `;
 
 export const Paragraph = styled.p`
-    padding: 0.5rem;
+    margin: 0.5rem;
 `;
 
 export const Preview = styled.div`

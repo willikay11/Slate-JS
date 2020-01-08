@@ -1,10 +1,10 @@
 import React from "react";
-import { Row, Col} from "antd";
+import { Row, Col, Button} from "antd";
 import Signature from "./components/Signature";
 import Text from "./components/Text";
 
-const dragSourceContainer = () => (
-    <Row style={{ flex: 'row', display: 'flex' }}>
+const dragSourceContainer = (props) => (
+    <Row>
         <Col span={12}>
             <Signature />
         </Col>
@@ -13,6 +13,9 @@ const dragSourceContainer = () => (
             <Text />
         </Col>
 
+        <Col span={24}>
+            <Button type="primary" onClick={props.onOpen}>Submit</Button>
+        </Col>
     </Row>
 );
 
